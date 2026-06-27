@@ -1,21 +1,20 @@
 @mixin liquid-glass(
-  $bg: rgba(255, 255, 255, 0.42),
-  $border: rgba(21, 20, 15, 0.08),
-  $blur: 12px
+  $border: rgba(255, 255, 255, 0.1),
+  $blur: 18px
 ) {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: $bg;
-  border: 1px solid $border;
-  backdrop-filter: url(#nav-liquid-glass) blur($blur) saturate(1.4);
-  -webkit-backdrop-filter: url(#nav-liquid-glass) blur($blur) saturate(1.4);
-  box-shadow:
-    inset 0 0 2px 1px rgba(255, 255, 255, 0.55),
-    inset 0 0 10px 4px rgba(255, 255, 255, 0.22),
-    0 6px 24px rgba(17, 17, 26, 0.06),
-    0 12px 40px rgba(17, 17, 26, 0.05);
+  -webkit-backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
+  backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
+  pointer-events: auto;
+  overflow: hidden;
+  
   transform: translateZ(0);
+  transition:
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    background-color 0.28s ease;
 
   &::before,
   &::after {
@@ -23,29 +22,45 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
+    border-radius: inherit;
   }
 
   &::before {
-    background:
-      radial-gradient(220px 120px at 20% 18%, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0) 70%),
-      radial-gradient(160px 120px at 82% 16%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 72%);
-    opacity: 0.9;
+    z-index: 0;
+
+    mix-blend-mode: screen;
   }
 
   &::after {
-    background:
-      linear-gradient(160deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.04) 24%, rgba(255, 255, 255, 0) 42%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 45%);
-    mix-blend-mode: screen;
-    opacity: 0.75;
+    z-index: 0;
+    padding: 1px;
+
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    opacity: 0.72;
+    filter: blur(0.1px);
   }
 
   > * {
     position: relative;
     z-index: 1;
   }
+
+  @media (hover: hover) and (pointer: fine) {
+   
+    &:hover::before {
+      opacity: 1;
+    }
+
+    &:hover::after {
+      opacity: 0.9;
+    }
+  }
 }
 
-@mixin liquid-glass-dark($bg: rgba(255, 255, 255, 0.36)) {
-  @include liquid-glass($bg);
+@mixin liquid-glass-dark(
+  $border: rgba(255, 255, 255, 0.1),
+  $blur: 18px
+) {
+  @include liquid-glass($bg, $border, $blur);
 }

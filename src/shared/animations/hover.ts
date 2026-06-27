@@ -1,6 +1,7 @@
 export const cardHover = {
   y: -6,
-  boxShadow: "0 22px 70px rgba(255, 45, 135, 0.14)",
+  boxShadow:
+    "0 24px 72px rgba(0, 0, 0, 0.48), 0 0 48px rgba(255, 45, 135, 0.095)",
   transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] }
 } as const;
 
