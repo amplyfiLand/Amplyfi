@@ -1,3 +1,9 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { cardHover } from "@/shared/animations/hover";
+import { fadeLeft, fadeUp, viewportOnce } from "@/shared/animations/reveal";
+import { staggerContainer } from "@/shared/animations/stagger";
 import { landingAssets, LandingAssetKey } from "@/shared/assets/landingAssets";
 import { landingContent, WhatWeDoKind } from "@/shared/config/landingContentClean";
 import styles from "./WhatWeDoSection.module.scss";
@@ -61,27 +67,43 @@ const cardBgMap: Record<WhatWeDoKind, string> = {
 export function WhatWeDoSection() {
   return (
     <section className={styles.section}>
-      <div className={styles.inner}>
-        <div className={styles.copy}>
+      <motion.div
+        className={styles.inner}
+        variants={staggerContainer(0, 0.1)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
+        <motion.div className={styles.copy} variants={fadeLeft}>
           <span className={styles.eyebrow}>{landingContent.whatWeDo.eyebrow}</span>
           <h2 className={styles.title}>{landingContent.whatWeDo.title}</h2>
-        </div>
-        <div className={styles.cards}>
+        </motion.div>
+        <motion.div className={styles.cards} variants={staggerContainer(0.08, 0.08)}>
           {landingContent.whatWeDo.items.map((item) => (
-            <article
+            <motion.article
               key={item.kind}
               className={styles.card}
               style={{ background: cardBgMap[item.kind] }}
+              variants={fadeUp}
+              whileHover={cardHover}
             >
-              <div className={styles.cardIcon}>{iconMap[item.kind]}</div>
+              <motion.div
+                className={styles.cardIcon}
+                initial={{ opacity: 0, rotate: -3, y: 6 }}
+                whileInView={{ opacity: 1, rotate: 0, y: 0 }}
+                viewport={viewportOnce}
+                transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {iconMap[item.kind]}
+              </motion.div>
               <div className={styles.cardBody}>
                 <span className={styles.cardTitle}>{item.title}</span>
                 <span className={styles.cardDescription}>{item.description}</span>
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

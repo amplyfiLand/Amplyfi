@@ -4,10 +4,13 @@ node_modules/
 # next
 .next/
 out/
+.turbo/
+.vercel/
 
 # production
 build/
 dist/
+coverage/
 
 # local env
 .env
@@ -35,7 +38,7 @@ fig-source/
 # local source/archive helpers
 .agents/
 .codex/
-Amplify (Copy).fig
+*.fig
 
 # OS/editor
 .DS_Store

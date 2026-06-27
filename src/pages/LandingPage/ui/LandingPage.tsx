@@ -1,3 +1,6 @@
+"use client";
+
+import { MotionConfig } from "framer-motion";
 import { ContactSection } from "@/widgets/ContactSection/ui/ContactSection";
 import { Header } from "@/widgets/Header/ui/Header";
 import { HeroSection } from "@/widgets/HeroSection/ui/HeroSection";
@@ -12,17 +15,19 @@ import styles from "./LandingPage.module.scss";
 
 export function LandingPage() {
   return (
-    <main className={styles.page}>
-      <Header />
-      <HeroSection />
-      <StatsBar />
-      <WhoWeAreSection />
-      <MountainDivider />
-      <WhatWeDoSection />
-      <TheySaidSection />
-      <LegaciesSection />
-      <HowWeHelpSection />
-      <ContactSection />
-    </main>
+    <MotionConfig reducedMotion="user">
+      <main className={styles.page}>
+        <Header />
+        <HeroSection />
+        <StatsBar />
+        <WhoWeAreSection />
+        <MountainDivider />
+        <WhatWeDoSection />
+        <TheySaidSection />
+        <LegaciesSection />
+        <HowWeHelpSection />
+        <ContactSection />
+      </main>
+    </MotionConfig>
   );
 }

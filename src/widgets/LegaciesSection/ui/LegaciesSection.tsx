@@ -1,23 +1,49 @@
+"use client";
+
+import { useRef } from "react";
+import { motion } from "framer-motion";
+import { useSubtleParallax } from "@/shared/animations/parallax";
+import { fadeLeft, fadeRight, fadeUp, softReveal, viewportOnce } from "@/shared/animations/reveal";
+import { staggerContainer } from "@/shared/animations/stagger";
 import { landingContent } from "@/shared/config/landingContentClean";
 import styles from "./LegaciesSection.module.scss";
 
 export function LegaciesSection() {
+  const sectionReference = useRef<HTMLElement>(null);
+  const videoY = useSubtleParallax(sectionReference, 14);
+
   return (
-    <section className={styles.section}>
-      <div className={styles.inner}>
+    <section className={styles.section} ref={sectionReference}>
+      <motion.div
+        className={styles.inner}
+        variants={staggerContainer(0, 0.1)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         <div className={styles.quoteRow}>
-          <div className={styles.accentLine} aria-hidden="true" />
-          <div className={styles.quoteBlock}>
-            <p className={styles.quoteSubtitle}>{landingContent.legacies.subtitle}</p>
-            <h2 className={styles.quoteTitle}>{landingContent.legacies.title}</h2>
+          <motion.div className={styles.accentLine} aria-hidden="true" variants={fadeLeft} />
+          <motion.div className={styles.quoteBlock} variants={staggerContainer(0.03, 0.08)}>
+            <motion.p className={styles.quoteSubtitle} variants={fadeUp}>
+              {landingContent.legacies.subtitle}
+            </motion.p>
+            <motion.h2 className={styles.quoteTitle} variants={fadeUp}>
+              {landingContent.legacies.title}
+            </motion.h2>
             {landingContent.legacies.lines.map((line) => (
-              <p key={line} className={styles.quoteLine}>{line}</p>
+              <motion.p key={line} className={styles.quoteLine} variants={fadeUp}>
+                {line}
+              </motion.p>
             ))}
-          </div>
-          <div className={`${styles.accentLine} ${styles.accentLineRight}`} aria-hidden="true" />
+          </motion.div>
+          <motion.div
+            className={`${styles.accentLine} ${styles.accentLineRight}`}
+            aria-hidden="true"
+            variants={fadeRight}
+          />
         </div>
-        <div className={styles.showcase}>
-          <video
+        <motion.div className={styles.showcase} variants={softReveal}>
+          <motion.video
             className={styles.legacyVideo}
             aria-hidden="true"
             autoPlay
@@ -25,12 +51,13 @@ export function LegaciesSection() {
             muted
             playsInline
             preload="auto"
+            style={{ y: videoY }}
           >
             <source src="/assets/High bitrate_Place at the top.mp4" type="video/mp4" />
-          </video>
+          </motion.video>
           <div className={styles.videoOverlay} aria-hidden="true" />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
