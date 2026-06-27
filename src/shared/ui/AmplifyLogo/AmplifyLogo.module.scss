@@ -4,6 +4,11 @@
   gap: 16px;
 }
 
+.mark {
+  animation: markGlow 8s ease-in-out infinite;
+  transform-origin: center;
+}
+
 .text {
   display: flex;
   flex-direction: column;
@@ -24,4 +29,23 @@
   letter-spacing: 0.42em;
   line-height: 1;
   color: var(--accent-color);
+}
+
+@keyframes markGlow {
+  0%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 rgba(255, 45, 135, 0));
+  }
+
+  50% {
+    opacity: 0.82;
+    filter: drop-shadow(0 0 10px rgba(255, 45, 135, 0.22));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark {
+    animation: none;
+  }
 }

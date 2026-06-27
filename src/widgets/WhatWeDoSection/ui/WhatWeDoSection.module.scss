@@ -60,6 +60,7 @@
   height: 57px;
   margin-top: 24px;
   background: var(--accent-color);
+  animation: maskedIconBreath 7s ease-in-out infinite;
 }
 
 .cardBody {
@@ -81,6 +82,27 @@
   line-height: 1.1;
   color: rgba(245, 245, 247, 0.62);
   white-space: pre-line;
+}
+
+@keyframes maskedIconBreath {
+  0%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 rgba(255, 45, 135, 0));
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.78;
+    filter: drop-shadow(0 0 14px rgba(255, 45, 135, 0.2));
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amplifyIcon {
+    animation: none;
+  }
 }
 
 @media (max-width: 1300px) {

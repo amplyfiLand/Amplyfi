@@ -49,6 +49,7 @@ export function MountainDivider() {
             <path
               d="M 391 171 L 369.484 171 L 276.038 76.534 L 244.853 106.956 L 162.593 21.917 L 21.277 171 L 0 171 L 162.436 0 L 244.689 85.045 L 275.874 54.623 L 391 171 Z"
               fill="url(#lg-divider)"
+              className={styles.logoPath}
             />
           </motion.svg>
         </div>

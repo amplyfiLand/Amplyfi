@@ -29,6 +29,7 @@ export function AmplifyLogo({
           </linearGradient>
         </defs>
         <path
+          className={styles.mark}
           d="M 186.595 82.678 L 176.327 82.678 L 131.733 37.004 L 116.85 51.713 L 77.594 10.597 L 10.154 82.678 L 0 82.678 L 77.519 0 L 116.772 41.119 L 131.654 26.41 L 186.595 82.678 Z"
           fill={`url(#${gradientId})`}
         />
