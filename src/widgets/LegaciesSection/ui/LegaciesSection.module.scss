@@ -1,0 +1,130 @@
+.section {
+  padding: 30px 0 0;
+}
+
+.inner {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--section-side-padding);
+}
+
+.quoteRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: clamp(40px, 4vw, 80px);
+}
+
+.accentLine {
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(255, 45, 135, 0) 0%, var(--accent-color) 100%);
+}
+
+.accentLineRight {
+  background: linear-gradient(90deg, var(--accent-color) 0%, rgba(255, 45, 135, 0) 100%);
+}
+
+.quoteBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  max-width: clamp(460px, 47vw, 900px);
+}
+
+.quoteSubtitle {
+  margin: 0;
+  font-size: clamp(22px, 2vw, 38px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--accent-color);
+}
+
+.quoteTitle {
+  margin: 0;
+  font-size: clamp(36px, 3.3vw, 64px);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-color);
+}
+
+.quoteLine {
+  margin: 0;
+  font-size: clamp(16px, 1.25vw, 24px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-color);
+}
+
+.showcase {
+  position: relative;
+  max-width: var(--content-max-width);
+  height: clamp(300px, 36.7vw, 705px);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 0.5px solid rgba(245, 245, 247, 0.5);
+}
+
+.legacyVideo,
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+}
+
+.legacyVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.videoOverlay {
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(3, 3, 7, 0.12) 0%, rgba(3, 3, 7, 0) 42%, rgba(3, 3, 7, 0.42) 100%),
+    linear-gradient(90deg, rgba(3, 3, 7, 0.28) 0%, rgba(3, 3, 7, 0) 22%, rgba(3, 3, 7, 0) 78%, rgba(3, 3, 7, 0.28) 100%);
+  backdrop-filter: blur(0.35px);
+}
+
+@media (max-width: 760px) {
+  .section {
+    padding-top: 28px;
+  }
+
+  .quoteRow {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    margin-bottom: 51px;
+  }
+
+  .accentLine {
+    width: 100%;
+    height: 2px;
+  }
+
+  .quoteBlock {
+    max-width: 100%;
+    gap: 12px;
+  }
+
+  .quoteSubtitle {
+    font-size: 16px;
+  }
+
+  .quoteTitle {
+    font-size: 24px;
+  }
+
+  .quoteLine {
+    font-size: 10px;
+  }
+
+  .showcase {
+    height: 208px;
+    border-radius: 10px;
+  }
+}

@@ -1,0 +1,44 @@
+# dependencies
+node_modules/
+
+# next
+.next/
+out/
+
+# production
+build/
+dist/
+
+# local env
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dev-server*.log
+start-server*.log
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# browser profiles / screenshots
+.edge-profile*/
+.chrome-profile*/
+fig-source/
+
+# local source/archive helpers
+.agents/
+.codex/
+Amplify (Copy).fig
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

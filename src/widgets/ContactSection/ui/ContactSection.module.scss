@@ -1,0 +1,132 @@
+.wrapper {
+  padding: clamp(30px, 3vw, 60px) var(--section-side-padding);
+  padding-bottom: clamp(30px, 3vw, 60px);
+}
+
+.inner {
+  position: relative;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  min-height: 540px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  padding: 30px;
+  row-gap: 0;
+}
+
+.background {
+  position: absolute;
+  left: 0;
+  top: -384px;
+  width: 100%;
+  height: calc(100% + 384px);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(3, 3, 7, 0.85) 20%, rgba(3, 3, 7, 0.1) 60%);
+}
+
+.logoRow {
+  position: relative;
+  z-index: 1;
+  align-self: start;
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  margin: auto 0 0;
+  padding-top: clamp(60px, 7vw, 130px);
+  font-size: clamp(42px, 4.2vw, 80px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-color);
+}
+
+.details {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: clamp(24px, 2.5vw, 48px);
+}
+
+.contactLine {
+  font-size: clamp(18px, 1.5vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+.contactLine:hover {
+  color: var(--accent-color);
+}
+
+.cta {
+  position: absolute;
+  z-index: 1;
+  right: 30px;
+  bottom: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 169px;
+  height: 60px;
+  border-radius: 5px;
+  background: var(--accent-color);
+  font-size: clamp(18px, 1.25vw, 24px);
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+.cta:hover {
+  opacity: 0.88;
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    padding: 16px;
+  }
+
+  .inner {
+    min-height: 272px;
+    border-radius: 10px;
+    padding: 26px 16px 17px;
+    text-align: center;
+  }
+
+  .logoRow {
+    justify-self: center;
+    transform: scale(0.33);
+  }
+
+  .title {
+    padding-top: 50px;
+    font-size: 32px;
+  }
+
+  .details {
+    align-items: center;
+    margin-top: 13px;
+  }
+
+  .contactLine {
+    font-size: 14px;
+  }
+
+  .cta {
+    position: static;
+    width: 125px;
+    height: 37px;
+    margin: 36px auto 0;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,138 @@
+.section {
+  min-height: 360px;
+  padding: 0 0 60px;
+}
+
+.inner {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--section-side-padding);
+  display: grid;
+  grid-template-columns: minmax(0, 517px) 1fr;
+  gap: clamp(40px, 4vw, 60px);
+  align-items: start;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+}
+
+.eyebrow {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--accent-color);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(36px, 3.3vw, 64px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-color);
+  white-space: pre-line;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.card {
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: clamp(280px, 18.75vw, 360px);
+}
+
+.cardIcon {
+  display: flex;
+  align-items: flex-start;
+}
+
+.amplifyIcon {
+  width: 109px;
+  height: 57px;
+  margin-top: 24px;
+  background: var(--accent-color);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardTitle {
+  font-size: clamp(22px, 1.7vw, 32px);
+  font-weight: 400;
+  line-height: 1;
+  color: rgba(245, 245, 247, 0.88);
+}
+
+.cardDescription {
+  font-size: clamp(16px, 1.25vw, 24px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: rgba(245, 245, 247, 0.62);
+  white-space: pre-line;
+}
+
+@media (max-width: 1300px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 760px) {
+  .section {
+    min-height: 470px;
+    padding: 0 0 24px;
+  }
+
+  .inner {
+    grid-template-columns: 217px 138px;
+    gap: 12px;
+    padding: 0 16px;
+  }
+
+  .copy {
+    gap: 157px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    min-height: 140px;
+    border-radius: 10px;
+    padding: 12px 9px;
+  }
+
+  .cardTitle {
+    font-size: 16px;
+  }
+
+  .cardDescription {
+    font-size: 12px;
+  }
+}

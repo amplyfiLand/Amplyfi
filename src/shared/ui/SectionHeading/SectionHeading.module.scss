@@ -1,0 +1,43 @@
+.heading {
+  display: grid;
+  gap: 18px;
+  max-width: 980px;
+}
+
+.center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent-color);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: var(--text-color);
+  font-size: clamp(34px, 4.8vw, 88px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+@media (max-width: 640px) {
+  .heading {
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: 1.05;
+  }
+}

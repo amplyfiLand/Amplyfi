@@ -1,0 +1,47 @@
+.wrapper {
+  padding: 0 var(--section-side-padding);
+  margin: 0 0 90px;
+}
+
+.inner {
+  position: relative;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  height: clamp(200px, 17vw, 330px);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+}
+
+.logoMark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 30px rgba(255, 45, 135, 0.5));
+}
+
+.logoMark svg {
+  width: clamp(160px, 20vw, 391px);
+  height: auto;
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    padding: 0 16px;
+    margin: 0 0 52px;
+  }
+
+  .inner {
+    height: 162px;
+    border-radius: 10px;
+  }
+}

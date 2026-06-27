@@ -1,0 +1,15 @@
+.header {
+  position: absolute;
+  top: 53px;
+  left: var(--section-side-padding);
+  z-index: 10;
+}
+
+@media (max-width: 640px) {
+  .header {
+    top: 20px;
+    left: 138px;
+    transform: scale(0.287);
+    transform-origin: top left;
+  }
+}
