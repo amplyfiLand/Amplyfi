@@ -1,3 +1,5 @@
+@use "../../../shared/styles/liquid-glass" as glass;
+
 .wrapper {
   padding: clamp(30px, 3vw, 60px) var(--section-side-padding);
   padding-bottom: clamp(30px, 3vw, 60px);
@@ -14,6 +16,7 @@
   grid-template-rows: auto 1fr auto auto;
   padding: 30px;
   row-gap: 0;
+  @include glass.liquid-glass();
 }
 
 .background {

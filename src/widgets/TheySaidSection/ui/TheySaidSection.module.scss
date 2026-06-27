@@ -1,3 +1,5 @@
+@use "../../../shared/styles/liquid-glass" as glass;
+
 .section {
   min-height: 480px;
   padding: 37px 0 74px;
@@ -34,6 +36,7 @@
   background: #0a0a0f;
   border-radius: 4.5px;
   padding: 24px 26px;
+  @include glass.liquid-glass();
 }
 
 .objectionText {

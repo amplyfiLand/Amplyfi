@@ -13,7 +13,7 @@ export function LegaciesSection() {
   const videoY = useSubtleParallax(sectionReference, 14);
 
   return (
-    <section className={styles.section} ref={sectionReference}>
+    <section className={styles.section} ref={sectionReference} id="legacies">
       <motion.div
         className={styles.inner}
         variants={staggerContainer(0, 0.1)}

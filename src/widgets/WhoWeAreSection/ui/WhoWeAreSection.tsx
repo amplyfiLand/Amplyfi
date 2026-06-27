@@ -11,7 +11,7 @@ import styles from "./WhoWeAreSection.module.scss";
 
 export function WhoWeAreSection() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="who-we-are">
       <motion.div
         className={styles.glowLine}
         aria-hidden="true"

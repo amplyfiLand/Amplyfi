@@ -1,3 +1,5 @@
+@use "../../../shared/styles/liquid-glass" as glass;
+
 .section {
   position: relative;
   overflow: hidden;
@@ -70,6 +72,7 @@
   padding: 38px 30px;
   display: flex;
   align-items: flex-start;
+  @include glass.liquid-glass();
 }
 
 .cardStrategic {
@@ -97,6 +100,7 @@
   border-radius: 20px;
   overflow: hidden;
   aspect-ratio: 285 / 525;
+  @include glass.liquid-glass();
 }
 
 .womanImage {

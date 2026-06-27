@@ -16,7 +16,7 @@ import styles from "./LandingPage.module.scss";
 export function LandingPage() {
   return (
     <MotionConfig reducedMotion="user">
-      <main className={styles.page}>
+      <main className={styles.page} id="top">
         <Header />
         <HeroSection />
         <StatsBar />

@@ -8,7 +8,7 @@ import styles from "./TheySaidSection.module.scss";
 
 export function TheySaidSection() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="they-said">
       <motion.div
         className={styles.inner}
         variants={staggerContainer(0, 0.12)}

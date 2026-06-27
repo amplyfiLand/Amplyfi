@@ -87,7 +87,7 @@ const cardBgMap: Record<WhatWeDoKind, string> = {
 
 export function WhatWeDoSection() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="what-we-do">
       <motion.div
         className={styles.inner}
         variants={staggerContainer(0, 0.1)}

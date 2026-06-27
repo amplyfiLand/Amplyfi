@@ -1,3 +1,5 @@
+@use "../../../shared/styles/liquid-glass" as glass;
+
 .section {
   position: relative;
   overflow: hidden;
@@ -49,6 +51,7 @@
   flex-direction: column;
   gap: 20px;
   min-height: clamp(400px, 34.4vw, 660px);
+  @include glass.liquid-glass();
 }
 
 .card[data-index="0"] {

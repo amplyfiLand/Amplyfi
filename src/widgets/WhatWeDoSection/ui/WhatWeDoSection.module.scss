@@ -1,3 +1,5 @@
+@use "../../../shared/styles/liquid-glass" as glass;
+
 .section {
   min-height: 360px;
   padding: 0 0 60px;
@@ -48,6 +50,7 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: clamp(280px, 18.75vw, 360px);
+  @include glass.liquid-glass();
 }
 
 .cardIcon {

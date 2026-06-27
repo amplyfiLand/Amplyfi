@@ -10,7 +10,7 @@ import styles from "./HowWeHelpSection.module.scss";
 
 export function HowWeHelpSection() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="how-we-help">
       <motion.div
         className={styles.inner}
         variants={staggerContainer(0, 0.09)}
