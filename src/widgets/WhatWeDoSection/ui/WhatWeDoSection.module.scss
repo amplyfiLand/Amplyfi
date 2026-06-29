@@ -118,20 +118,49 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .section {
-    min-height: 470px;
+    padding: 0 0 40px;
+  }
+
+  .copy {
+    gap: clamp(20px, 3vw, 40px);
+  }
+
+  .eyebrow {
+    font-size: 18px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .card {
+    min-height: clamp(200px, 26vw, 300px);
+  }
+
+  .cardTitle {
+    font-size: clamp(18px, 2.4vw, 26px);
+  }
+
+  .cardDescription {
+    font-size: clamp(13px, 1.6vw, 18px);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
     padding: 0 0 24px;
   }
 
   .inner {
-    grid-template-columns: 217px 138px;
-    gap: 12px;
     padding: 0 16px;
+    gap: 24px;
   }
 
   .copy {
-    gap: 157px;
+    gap: 16px;
   }
 
   .eyebrow {
@@ -139,18 +168,40 @@
   }
 
   .title {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .cards {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
 
   .card {
-    min-height: 140px;
+    min-height: 160px;
     border-radius: 10px;
-    padding: 12px 9px;
+    padding: 16px 14px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cardIcon {
+    justify-content: center;
+
+    svg {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  .amplifyIcon {
+    width: 64px;
+    height: 33px;
+    margin-top: 8px;
+  }
+
+  .cardBody {
+    align-items: center;
+    gap: 8px;
   }
 
   .cardTitle {

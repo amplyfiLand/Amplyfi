@@ -128,13 +128,40 @@
 
   .cards {
     max-width: 880px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .section {
+    min-height: unset;
+    padding: 28px 0 60px;
+  }
+
+  .copy {
+    gap: clamp(24px, 4vw, 40px);
+    padding-top: 0;
+  }
+
+  .eyebrow {
+    font-size: 18px;
+  }
+
+  .cards {
+    max-width: 100%;
+    margin-top: 32px;
+  }
+
+  .cardTitle {
+    font-size: clamp(18px, 2.2vw, 28px);
   }
 }
 
 @media (max-width: 640px) {
   .section {
-    min-height: 935px;
-    padding: 38px 0 40px;
+    min-height: unset;
+    padding: 28px 0 40px;
   }
 
   .inner {

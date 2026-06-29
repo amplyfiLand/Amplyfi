@@ -67,6 +67,52 @@
   color: var(--text-color);
 }
 
+// ── Mobile slider (hidden on desktop) ────────────────────────────
+.slider {
+  display: none;
+}
+
+.slide {
+  flex: 0 0 260px;
+  scroll-snap-align: center;
+  background: rgba(10, 10, 15, 0.8);
+  border-radius: 8px;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: rgba(245, 245, 247, 0.72);
+  text-align: left;
+  font-family: inherit;
+  transition: border-color 0.25s ease, color 0.25s ease;
+  @include glass.liquid-glass();
+}
+
+.slideActive {
+  border-color: rgba(255, 45, 135, 0.5);
+  color: var(--text-color);
+  box-shadow: 0 0 20px rgba(255, 45, 135, 0.1);
+}
+
+.mobileResponse {
+  display: none;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.mobileResponsePink {
+  color: #FF2D87;
+}
+
+.mobileResponseWhite {
+  color: rgba(245, 245, 247, 0.88);
+}
+
+// ── Desktop response layout ───────────────────────────────────────
 // Wrapper takes the 1fr column but contributes 0 height to the grid row,
 // so the row height is determined solely by the button — no vertical jumping.
 .responseWrapper {
@@ -96,9 +142,15 @@
   max-width: 70%;
 }
 
+@media (max-width: 1100px) {
+  .item {
+    gap: clamp(24px, 4vw, 80px);
+  }
+}
+
 @media (max-width: 900px) {
   .section {
-    min-height: 420px;
+    min-height: unset;
     padding: 24px 0 50px;
   }
 
@@ -107,21 +159,30 @@
   }
 
   .eyebrow {
-    margin-bottom: 23px;
-    font-size: 12px;
+    margin-bottom: 20px;
+    font-size: 16px;
   }
 
   .list {
-    gap: 20px;
+    gap: 16px;
   }
 
   .item {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
 
   .objectionBox {
-    padding: 18px 20px;
+    padding: 16px 18px;
+  }
+
+  .objectionText {
+    font-size: clamp(16px, 2.2vw, 22px);
+  }
+
+  .waveform {
+    opacity: 0.1;
+    width: clamp(200px, 55vw, 500px);
   }
 
   // On mobile items stack, so restore normal flow for the response text
@@ -134,5 +195,49 @@
     position: static;
     max-width: 100%;
     font-size: 14px;
+  }
+
+  .responseTextActive {
+    font-size: clamp(15px, 2vw, 22px);
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .eyebrow {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+
+  .waveform {
+    display: none;
+  }
+
+  // Hide desktop list, show slider
+  .list {
+    display: none;
+  }
+
+  .slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    // Break out of .inner padding (16px each side) to reach viewport edges
+    margin: 0 -16px;
+    // Padding centers the 260px-wide slides in the viewport
+    padding: 0 calc(50vw - 130px);
+    padding-bottom: 4px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .mobileResponse {
+    display: block;
+    margin-top: 20px;
   }
 }

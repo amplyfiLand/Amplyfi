@@ -102,6 +102,34 @@
   opacity: 0.88;
 }
 
+@media (max-width: 900px) {
+  .inner {
+    min-height: 420px;
+    padding: 24px;
+  }
+
+  .title {
+    font-size: clamp(32px, 5vw, 60px);
+    padding-top: clamp(40px, 6vw, 80px);
+  }
+
+  .details {
+    margin-top: clamp(16px, 2.5vw, 32px);
+  }
+
+  .contactLine {
+    font-size: clamp(16px, 2vw, 22px);
+  }
+
+  .cta {
+    right: 24px;
+    bottom: 24px;
+    width: 140px;
+    height: 50px;
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 640px) {
   .wrapper {
     padding: 16px;
