@@ -5,10 +5,11 @@ import { motion } from "framer-motion";
 import { useSubtleParallax } from "@/shared/animations/parallax";
 import { fadeLeft, fadeRight, fadeUp, softReveal, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
-import { landingContent } from "@/shared/config/landingContentClean";
+import { useLandingContent } from "@/shared/contexts/LandingContent";
 import styles from "./LegaciesSection.module.scss";
 
 export function LegaciesSection() {
+  const landingContent = useLandingContent();
   const sectionReference = useRef<HTMLElement>(null);
   const videoY = useSubtleParallax(sectionReference, 14);
 

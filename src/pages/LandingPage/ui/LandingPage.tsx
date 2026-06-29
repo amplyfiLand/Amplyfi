@@ -1,7 +1,10 @@
 "use client";
 
 import { MotionConfig } from "framer-motion";
+import { LandingContentProvider } from "@/shared/contexts/LandingContent";
+import type { SanityLandingContent } from "@/shared/sanity/types";
 import { ContactSection } from "@/widgets/ContactSection/ui/ContactSection";
+import { Footer } from "@/widgets/Footer/ui/Footer";
 import { Header } from "@/widgets/Header/ui/Header";
 import { HeroSection } from "@/widgets/HeroSection/ui/HeroSection";
 import { HowWeHelpSection } from "@/widgets/HowWeHelpSection/ui/HowWeHelpSection";
@@ -13,21 +16,28 @@ import { WhatWeDoSection } from "@/widgets/WhatWeDoSection/ui/WhatWeDoSection";
 import { WhoWeAreSection } from "@/widgets/WhoWeAreSection/ui/WhoWeAreSection";
 import styles from "./LandingPage.module.scss";
 
-export function LandingPage() {
+interface Props {
+  sanityData: SanityLandingContent | null;
+}
+
+export function LandingPage({ sanityData }: Props) {
   return (
-    <MotionConfig reducedMotion="user">
-      <main className={styles.page} id="top">
-        <Header />
-        <HeroSection />
-        <StatsBar />
-        <WhoWeAreSection />
-        <MountainDivider />
-        <WhatWeDoSection />
-        <TheySaidSection />
-        <LegaciesSection />
-        <HowWeHelpSection />
-        <ContactSection />
-      </main>
-    </MotionConfig>
+    <LandingContentProvider sanityData={sanityData}>
+      <MotionConfig reducedMotion="user">
+        <main className={styles.page} id="top">
+          <Header />
+          <HeroSection />
+          <StatsBar />
+          <WhoWeAreSection />
+          <MountainDivider />
+          <WhatWeDoSection />
+          <TheySaidSection />
+          <LegaciesSection />
+          <HowWeHelpSection />
+          <ContactSection />
+          <Footer />
+        </main>
+      </MotionConfig>
+    </LandingContentProvider>
   );
 }

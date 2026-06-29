@@ -7,12 +7,13 @@ import { useSubtleParallax } from "@/shared/animations/parallax";
 import { fadeUp, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
 import { landingAssets, LandingAssetKey } from "@/shared/assets/landingAssets";
-import { landingContent } from "@/shared/config/landingContentClean";
+import { useLandingContent } from "@/shared/contexts/LandingContent";
 import { AmplifyLogo } from "@/shared/ui/AmplifyLogo/AmplifyLogo";
 import { ContactModal } from "./ContactModal";
 import styles from "./ContactSection.module.scss";
 
 export function ContactSection() {
+  const landingContent = useLandingContent();
   const wrapperReference = useRef<HTMLDivElement>(null);
   const backgroundY = useSubtleParallax(wrapperReference, 18);
   const [modalOpen, setModalOpen] = useState(false);

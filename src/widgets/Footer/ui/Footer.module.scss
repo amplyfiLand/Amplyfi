@@ -1,0 +1,52 @@
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 24px 0;
+  background: var(--background-color, #03030f);
+}
+
+.inner {
+  max-width: var(--content-max-width, 1440px);
+  margin: 0 auto;
+  padding: 0 var(--section-side-padding, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.copy {
+  font-size: 13px;
+  color: rgba(245, 245, 247, 0.35);
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.link {
+  font-size: 13px;
+  color: rgba(245, 245, 247, 0.45);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: rgba(245, 245, 247, 0.8);
+  }
+}
+
+@media (max-width: 640px) {
+  .inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .links {
+    justify-content: center;
+    gap: 16px;
+  }
+}

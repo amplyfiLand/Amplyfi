@@ -11,7 +11,7 @@ import {
 } from "framer-motion";
 import { fadeUp, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
-import { landingContent } from "@/shared/config/landingContentClean";
+import { useLandingContent } from "@/shared/contexts/LandingContent";
 import styles from "./StatsBar.module.scss";
 
 type AnimatedValueProperties = {
@@ -53,6 +53,7 @@ function AnimatedValue({ value, active }: AnimatedValueProperties) {
 }
 
 export function StatsBar() {
+  const landingContent = useLandingContent();
   const barReference = useRef<HTMLDivElement>(null);
   const isInView = useInView(barReference, viewportOnce);
 

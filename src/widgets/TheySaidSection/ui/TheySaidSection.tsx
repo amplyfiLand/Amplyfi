@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { fadeLeft, fadeRight, fadeUp, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
 import { landingAssets, LandingAssetKey } from "@/shared/assets/landingAssets";
-import { landingContent } from "@/shared/config/landingContentClean";
+import { useLandingContent } from "@/shared/contexts/LandingContent";
 import styles from "./TheySaidSection.module.scss";
 
 function splitAtFirstSentence(text: string): [string, string] {
@@ -15,11 +15,12 @@ function splitAtFirstSentence(text: string): [string, string] {
 }
 
 const ease = [0.22, 1, 0.36, 1] as const;
-const ITEMS = landingContent.theySaid.items;
 const AUTO_INTERVAL = 3500;
 const RESUME_DELAY = 5000;
 
 export function TheySaidSection() {
+  const landingContent = useLandingContent();
+  const ITEMS = landingContent.theySaid.items;
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);

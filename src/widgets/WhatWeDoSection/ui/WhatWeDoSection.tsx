@@ -6,7 +6,8 @@ import { cardHover } from "@/shared/animations/hover";
 import { fadeLeft, fadeUp, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
 import { landingAssets, LandingAssetKey } from "@/shared/assets/landingAssets";
-import { landingContent, WhatWeDoKind } from "@/shared/config/landingContentClean";
+import { WhatWeDoKind } from "@/shared/config/landingContentClean";
+import { useLandingContent } from "@/shared/contexts/LandingContent";
 import styles from "./WhatWeDoSection.module.scss";
 
 function DiscoverIcon() {
@@ -86,6 +87,7 @@ const cardBgMap: Record<WhatWeDoKind, string> = {
 };
 
 export function WhatWeDoSection() {
+  const landingContent = useLandingContent();
   return (
     <section className={styles.section} id="what-we-do">
       <motion.div

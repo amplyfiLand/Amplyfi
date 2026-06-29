@@ -1,4 +1,6 @@
-import { landingContent } from "@/shared/config/landingContentClean";
+"use client";
+
+import { useLandingContent } from "@/shared/contexts/LandingContent";
 import styles from "./AmplifyLogo.module.scss";
 
 type AmplifyLogoProperties = {
@@ -12,6 +14,7 @@ export function AmplifyLogo({
   markWidth = 104,
   markHeight = 46
 }: AmplifyLogoProperties) {
+  const landingContent = useLandingContent();
   return (
     <div className={styles.logo}>
       <svg

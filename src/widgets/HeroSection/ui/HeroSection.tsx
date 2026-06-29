@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 import { buttonHover, buttonTap } from "@/shared/animations/hover";
 import { fadeUp, softReveal } from "@/shared/animations/reveal";
 import { heroStagger } from "@/shared/animations/stagger";
-import { landingContent } from "@/shared/config/landingContentClean";
+import { useLandingContent } from "@/shared/contexts/LandingContent";
 import styles from "./HeroSection.module.scss";
 
 export function HeroSection() {
+  const landingContent = useLandingContent();
   return (
     <section className={styles.hero}>
       <motion.video

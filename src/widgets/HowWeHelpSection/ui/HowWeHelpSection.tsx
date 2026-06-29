@@ -5,10 +5,11 @@ import { ambientLine } from "@/shared/animations/ambient";
 import { cardHover } from "@/shared/animations/hover";
 import { fadeUp, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
-import { landingContent } from "@/shared/config/landingContentClean";
+import { useLandingContent } from "@/shared/contexts/LandingContent";
 import styles from "./HowWeHelpSection.module.scss";
 
 export function HowWeHelpSection() {
+  const landingContent = useLandingContent();
   return (
     <section className={styles.section} id="how-we-help">
       <motion.div

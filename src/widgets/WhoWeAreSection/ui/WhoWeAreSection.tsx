@@ -6,10 +6,11 @@ import { cardHover } from "@/shared/animations/hover";
 import { fadeLeft, fadeRight, softReveal, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
 import { landingAssets, LandingAssetKey } from "@/shared/assets/landingAssets";
-import { landingContent } from "@/shared/config/landingContentClean";
+import { useLandingContent } from "@/shared/contexts/LandingContent";
 import styles from "./WhoWeAreSection.module.scss";
 
 export function WhoWeAreSection() {
+  const landingContent = useLandingContent();
   return (
     <section className={styles.section} id="who-we-are">
       <motion.div
