@@ -1,21 +1,10 @@
 .header {
   position: absolute;
   top: 53px;
-  left: var(--section-side-padding);
+  left: 0;
+  right: 0;
   z-index: 10;
   pointer-events: none;
-}
-
-.top {
-  width: auto;
-}
-
-.sticky {
-  position: fixed;
-  top: 14px;
-  left: 50%;
-  width: min(1980px, calc(100% - 32px));
-  transform: translateX(-50%);
 }
 
 .filterDefs {
@@ -23,6 +12,25 @@
   width: 0;
   height: 0;
   overflow: hidden;
+}
+
+// Non-sticky: logo centred to content grid — aligns with "We Find"
+.top {
+  display: flex;
+  align-items: flex-start;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--section-side-padding);
+}
+
+// Sticky: bar fills the content width edge-to-edge, no external gaps
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  // spans content + its two side-paddings → 0 outer gap at normal viewports
+  width: min(calc(var(--content-max-width) + 2 * var(--section-side-padding)), 100%);
 }
 
 .compact {
@@ -39,7 +47,6 @@
   gap: 18px;
   width: 100%;
   padding: 9px 0;
-  border-radius: 999px;
   border: 0;
   -webkit-backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
   backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
@@ -120,7 +127,10 @@
 @media (max-width: 640px) {
   .header {
     top: 12px;
-    left: 16px;
+  }
+
+  .top {
+    padding: 0 16px;
   }
 
   .sticky {

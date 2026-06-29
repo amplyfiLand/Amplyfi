@@ -54,34 +54,31 @@
 
 .cards {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 285px);
+  grid-template-columns: repeat(3, 1fr);
   gap: clamp(10px, 1vw, 20px);
   align-items: end;
-}
-
-.smallCards {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(8px, 1vw, 20px);
-  justify-content: flex-end;
 }
 
 .cardStrategic,
 .cardPersonal {
   border-radius: 20px;
-  padding: 38px 30px;
   display: flex;
   align-items: flex-start;
+  aspect-ratio: 285 / 318;
   @include glass.liquid-glass();
 }
 
 .cardStrategic {
+  padding: 38px 30px;
   background:
     radial-gradient(490px 277px at 79% 71%, rgba(255, 45, 135, 0.2), rgba(3, 3, 7, 0) 70%),
     linear-gradient(13deg, rgba(3, 3, 7, 0.4), rgba(30, 30, 30, 0.4));
+  // stagger: 165px above bottom at reference 285px column width → scales with column via % margin
+  margin-bottom: calc(165 / 285 * 100%);
 }
 
 .cardPersonal {
+  padding: 39px 40px;
   background:
     radial-gradient(390px 136px at 45% 97%, rgba(255, 45, 135, 0.2), rgba(3, 3, 7, 0) 70%),
     linear-gradient(13deg, rgba(3, 3, 7, 0.4), rgba(30, 30, 30, 0.4));
@@ -101,24 +98,27 @@
   overflow: hidden;
   aspect-ratio: 285 / 525;
   @include glass.liquid-glass();
-}
 
-.womanImage {
-  position: absolute;
-  inset: 0;
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  opacity: 0.2;
-}
+  // liquid-glass sets > * { position: relative } with specificity (0,1,1),
+  // overriding the (0,1,0) of .womanImage/.womanOverlay.
+  // Nesting here gives (0,2,0) to restore absolute positioning.
+  .womanImage {
+    position: absolute;
+    inset: 0;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+  }
 
-.womanOverlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(640px 1020px at -60% -8%, rgba(255, 45, 135, 0.45), rgba(3, 3, 7, 0) 70%),
-    radial-gradient(140px 140px at 66% 54%, rgba(255, 45, 135, 0.55), rgba(3, 3, 7, 0) 70%),
-    linear-gradient(8deg, rgba(3, 3, 7, 0.5), rgba(30, 30, 30, 0.5));
+  .womanOverlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(640px 1020px at -60% -8%, rgba(255, 45, 135, 0.45), rgba(3, 3, 7, 0) 70%),
+      radial-gradient(140px 140px at 66% 54%, rgba(255, 45, 135, 0.55), rgba(3, 3, 7, 0) 70%),
+      linear-gradient(8deg, rgba(3, 3, 7, 0.5), rgba(30, 30, 30, 0.5));
+  }
 }
 
 @media (max-width: 1200px) {
@@ -127,7 +127,7 @@
   }
 
   .cards {
-    max-width: 620px;
+    max-width: 880px;
   }
 }
 
@@ -158,18 +158,35 @@
   .cards {
     max-width: 100%;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     margin-top: 42px;
+    align-items: stretch;
   }
 
-  .womanCard {
-    aspect-ratio: 138 / 254;
-  }
-
-  .cardStrategic,
   .cardPersonal {
+    grid-column: 1;
+    grid-row: 1;
+    aspect-ratio: unset;
     min-height: 154px;
     border-radius: 10px;
     padding: 18px 14px;
+  }
+
+  .cardStrategic {
+    grid-column: 1;
+    grid-row: 2;
+    aspect-ratio: unset;
+    margin-bottom: 0;
+    min-height: 154px;
+    border-radius: 10px;
+    padding: 18px 14px;
+  }
+
+  .womanCard {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    aspect-ratio: 138 / 254;
+    align-self: end;
   }
 
   .cardTitle {

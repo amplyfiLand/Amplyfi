@@ -45,18 +45,16 @@ export function WhoWeAreSection() {
           <p className={styles.description}>{landingContent.whoWeAre.description}</p>
         </motion.div>
         <motion.div className={styles.cards} aria-hidden="true" variants={fadeRight}>
-          <div className={styles.smallCards}>
-            <motion.div className={styles.cardStrategic} whileHover={cardHover}>
-              <span className={styles.cardTitle}>
-                {landingContent.whoWeAre.cards[1].title}
-              </span>
-            </motion.div>
-            <motion.div className={styles.cardPersonal} whileHover={cardHover}>
-              <span className={styles.cardTitle}>
-                {landingContent.whoWeAre.cards[0].title}
-              </span>
-            </motion.div>
-          </div>
+          <motion.div className={styles.cardPersonal} whileHover={cardHover}>
+            <span className={styles.cardTitle}>
+              {landingContent.whoWeAre.cards[0].title}
+            </span>
+          </motion.div>
+          <motion.div className={styles.cardStrategic} whileHover={cardHover}>
+            <span className={styles.cardTitle}>
+              {landingContent.whoWeAre.cards[1].title}
+            </span>
+          </motion.div>
           <motion.div className={styles.womanCard} variants={softReveal} whileHover={cardHover}>
             <div
               className={styles.womanImage}

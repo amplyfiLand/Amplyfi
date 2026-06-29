@@ -17,23 +17,27 @@
   padding: 30px;
   row-gap: 0;
   @include glass.liquid-glass();
-}
 
-.background {
-  position: absolute;
-  left: 0;
-  top: -384px;
-  width: 100%;
-  height: calc(100% + 384px);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
+  // liquid-glass sets > * { position: relative } with specificity (0,1,1).
+  // Nesting here gives (0,2,0) to restore absolute positioning on layout layers.
+  .background {
+    position: absolute;
+    left: 0;
+    top: -384px;
+    width: 100%;
+    height: calc(100% + 384px);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(3, 3, 7, 0.85) 20%, rgba(3, 3, 7, 0.1) 60%);
+  .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(90deg, rgba(3, 3, 7, 0.85) 20%, rgba(3, 3, 7, 0.1) 60%);
+  }
 }
 
 .logoRow {
@@ -50,7 +54,7 @@
   font-size: clamp(42px, 4.2vw, 80px);
   font-weight: 400;
   line-height: 1;
-  color: var(--text-color);
+  color: var(--accent-color);
 }
 
 .details {
@@ -58,6 +62,7 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 6px;
   margin-top: clamp(24px, 2.5vw, 48px);
 }
@@ -83,11 +88,14 @@
   justify-content: center;
   width: 169px;
   height: 60px;
+  border: none;
   border-radius: 5px;
   background: var(--accent-color);
   font-size: clamp(18px, 1.25vw, 24px);
+  font-family: inherit;
   font-weight: 400;
   color: var(--text-color);
+  cursor: pointer;
 }
 
 .cta:hover {
