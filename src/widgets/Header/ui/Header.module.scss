@@ -1,4 +1,13 @@
-.header {
+.filterDefs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+// ── Compact logo (non-sticky) ─────────────────────────────────────
+// Always absolute, never changes position — only opacity/y animate
+.logoWrapper {
   position: absolute;
   top: 53px;
   left: 0;
@@ -7,15 +16,7 @@
   pointer-events: none;
 }
 
-.filterDefs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
-// Non-sticky: logo centred to content grid — aligns with "We Find"
-.top {
+.logoInner {
   display: flex;
   align-items: flex-start;
   max-width: var(--content-max-width);
@@ -23,20 +24,20 @@
   padding: 0 var(--section-side-padding);
 }
 
-// Sticky: bar fills the content width edge-to-edge, no external gaps
-.sticky {
+.compact {
+  display: inline-flex;
+  align-items: center;
+}
+
+// ── Sticky nav ────────────────────────────────────────────────────
+// Always fixed, never changes position — only opacity/y animate
+.navWrapper {
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  // spans content + its two side-paddings → 0 outer gap at normal viewports
   width: min(calc(var(--content-max-width) + 2 * var(--section-side-padding)), 100%);
-}
-
-.compact {
-  display: inline-flex;
-  align-items: center;
-  pointer-events: auto;
+  z-index: 10;
 }
 
 .nav {
@@ -47,11 +48,10 @@
   gap: 18px;
   width: 100%;
   padding: 9px 0;
-  border: 0;
   -webkit-backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
   backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
-  pointer-events: auto;
   overflow: hidden;
+  will-change: transform, opacity;
 }
 
 .nav::before,
@@ -60,8 +60,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.26s ease;
+  border-radius: inherit;
 }
 
 .nav::before {
@@ -96,11 +95,16 @@
 }
 
 .link {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: clamp(14px, 1vw, 18px);
+  font-weight: 400;
   line-height: 1;
-  color: rgba(245, 245, 247, 0.68);
+  color: rgba(245, 245, 247, 0.88);
   white-space: nowrap;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--text-color);
+  }
 }
 
 .cta {
@@ -108,32 +112,33 @@
   align-items: center;
   justify-content: center;
   height: 40px;
-  padding: 0 18px;
+  padding: 0 22px;
   border-radius: 999px;
   background: rgba(255, 45, 135, 0.9);
   color: var(--text-color);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: clamp(14px, 1vw, 18px);
+  font-weight: 400;
   white-space: nowrap;
-  box-shadow: 0 8px 24px rgba(255, 45, 135, 0.1);
+  box-shadow: 0 8px 24px rgba(255, 45, 135, 0.18);
   margin-right: 16px;
-}
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 
-.sticky .nav::before,
-.sticky .nav::after {
-  opacity: 1;
+  &:hover {
+    background: rgba(255, 45, 135, 1);
+    box-shadow: 0 8px 32px rgba(255, 45, 135, 0.32);
+  }
 }
 
 @media (max-width: 640px) {
-  .header {
+  .logoWrapper {
     top: 12px;
   }
 
-  .top {
+  .logoInner {
     padding: 0 16px;
   }
 
-  .sticky {
+  .navWrapper {
     top: 8px;
     left: 8px;
     width: calc(100% - 16px);

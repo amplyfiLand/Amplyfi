@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeLeft, fadeRight, fadeUp, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
+import { landingAssets, LandingAssetKey } from "@/shared/assets/landingAssets";
 import { landingContent } from "@/shared/config/landingContentClean";
 import styles from "./TheySaidSection.module.scss";
 
@@ -44,6 +45,12 @@ export function TheySaidSection() {
 
   return (
     <section className={styles.section} id="they-said">
+      <img
+        className={styles.waveform}
+        src={landingAssets[LandingAssetKey.Waveform]}
+        alt=""
+        aria-hidden="true"
+      />
       <motion.div
         className={styles.inner}
         variants={staggerContainer(0, 0.12)}

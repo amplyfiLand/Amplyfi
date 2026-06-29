@@ -1,8 +1,22 @@
 @use "../../../shared/styles/liquid-glass" as glass;
 
 .section {
+  position: relative;
+  overflow: hidden;
   min-height: 480px;
   padding: 37px 0 74px;
+}
+
+.waveform {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(300px, 45vw, 860px);
+  height: auto;
+  pointer-events: none;
+  opacity: 0.18;
+  user-select: none;
 }
 
 .inner {
@@ -79,7 +93,7 @@
 .responseTextActive {
   font-size: clamp(18px, 1.5vw, 28px);
   line-height: 1.2;
-  max-width: none;
+  max-width: 70%;
 }
 
 @media (max-width: 900px) {

@@ -8,8 +8,7 @@
   -webkit-backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
   backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
   pointer-events: auto;
-  overflow: hidden;
-  
+
   transform: translateZ(0);
   transition:
     border-color 0.28s ease,
@@ -23,21 +22,19 @@
     inset: 0;
     pointer-events: none;
     border-radius: inherit;
+    z-index: 0;
   }
 
+  // Top-left + bottom-right catchlights — same as sticky header
   &::before {
-    z-index: 0;
-
+  
     mix-blend-mode: screen;
   }
 
+  // Diagonal highlight streak
   &::after {
-    z-index: 0;
-    padding: 1px;
 
-    mask-composite: exclude;
-    -webkit-mask-composite: xor;
-    opacity: 0.72;
+    mix-blend-mode: screen;
     filter: blur(0.1px);
   }
 
@@ -45,22 +42,11 @@
     position: relative;
     z-index: 1;
   }
-
-  @media (hover: hover) and (pointer: fine) {
-   
-    &:hover::before {
-      opacity: 1;
-    }
-
-    &:hover::after {
-      opacity: 0.9;
-    }
-  }
 }
 
 @mixin liquid-glass-dark(
   $border: rgba(255, 255, 255, 0.1),
   $blur: 18px
 ) {
-  @include liquid-glass($bg, $border, $blur);
+  @include liquid-glass($border, $blur);
 }
