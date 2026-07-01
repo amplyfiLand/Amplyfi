@@ -9,9 +9,14 @@ const inter = Inter({
   variable: "--font-inter"
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://amplyfi-beta.vercel.app";
+
 const FALLBACK_META = {
-  title: "Amplify Talent Agency",
-  description: "A European talent agency that works with ambitious creators.",
+  title: "Amplify Talent Agency | We Find, Develop & Amplify Creators",
+  description:
+    "Amplify is a European talent agency for ambitious content creators. We find unique talent, build their personal brand and grow their audience to millions worldwide.",
+  keywords:
+    "talent agency, content creators, YouTube talent agency, TikTok creators, influencer management, creator management, European talent agency, brand deals, creator monetization",
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -19,23 +24,72 @@ export async function generateMetadata(): Promise<Metadata> {
   const seo = data?.seo;
   const title = seo?.title ?? FALLBACK_META.title;
   const description = seo?.description ?? FALLBACK_META.description;
+  const keywords = seo?.keywords ?? FALLBACK_META.keywords;
+  const ogImage = seo?.ogImage
+    ? [{ url: seo.ogImage as string, width: 1200, height: 630, alt: title }]
+    : [{ url: `${SITE_URL}/assets/hero.png`, width: 1200, height: 630, alt: title }];
+
   return {
-    title,
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: title,
+      template: "%s | Amplify Talent Agency",
+    },
     description,
-    keywords: seo?.keywords,
+    keywords,
     icons: { icon: "/assets/favicon.svg" },
-    openGraph: { title, description, type: "website" },
-    twitter: { card: "summary_large_image", title, description },
-    robots: { index: true, follow: true },
+    alternates: { canonical: "/" },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: "/",
+      siteName: "Amplify Talent Agency",
+      locale: "en_US",
+      images: ogImage,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ogImage.map((i) => i.url),
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    },
   };
 }
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Amplify Talent Agency",
+  url: SITE_URL,
+  logo: `${SITE_URL}/assets/favicon.svg`,
+  description:
+    "European talent agency for ambitious content creators. We find, develop and amplify creators to reach millions worldwide.",
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "amplify.mail@amplify.com",
+    contactType: "customer service",
+  },
+  sameAs: [],
+};
 
 type RootLayoutProperties = Readonly<{ children: React.ReactNode }>;
 
 export default function RootLayout({ children }: RootLayoutProperties) {
   return (
     <html lang="en" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </body>
     </html>
   );
 }
