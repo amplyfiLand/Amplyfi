@@ -220,16 +220,9 @@ export function ContactModal({ isOpen, onClose }: Props) {
                         : `${form.message.length}/2000`}
                     </span>
                   </div>
-                  {TURNSTILE_KEY && (
+                  {TURNSTILE_KEY && !turnstileToken && (
                     <div className={styles.turnstile}>
-                      {turnstileToken ? (
-                        <div className={styles.captchaDone}>
-                          <span className={styles.captchaDoneIcon}>✓</span>
-                          <span className={styles.captchaDoneText}>Verified</span>
-                        </div>
-                      ) : (
-                        <TurnstileWidget siteKey={TURNSTILE_KEY} onVerify={handleTurnstileVerify} onExpire={handleTurnstileExpire} />
-                      )}
+                      <TurnstileWidget siteKey={TURNSTILE_KEY} onVerify={handleTurnstileVerify} onExpire={handleTurnstileExpire} />
                     </div>
                   )}
                   <label className={styles.gdpr}>
@@ -246,9 +239,14 @@ export function ContactModal({ isOpen, onClose }: Props) {
                     </span>
                   </label>
                   {errorMsg && <p className={styles.errorMsg}>{errorMsg}</p>}
-                  <button type="submit" className={styles.submit} disabled={status === "loading"}>
-                    {status === "loading" ? "Sending…" : "Send"}
-                  </button>
+                  <div className={styles.submitRow}>
+                    {turnstileToken && (
+                      <span className={styles.verifiedBadge}>✓ Verified</span>
+                    )}
+                    <button type="submit" className={styles.submit} disabled={status === "loading"}>
+                      {status === "loading" ? "Sending…" : "Send"}
+                    </button>
+                  </div>
                 </form>
               </>
             )}

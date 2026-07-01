@@ -2,57 +2,43 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const MIN_DISPLAY_MS = 1200;
+// Extra buffer after window.load — gives videos time to start buffering
+const POST_LOAD_BUFFER_MS = 2000;
+const MAX_WAIT_MS = 10000;
 
 export function PageLoader() {
   const [fading, setFading] = useState(false);
   const [gone, setGone] = useState(false);
-  const startTime = useRef(Date.now());
+  const startRef = useRef(Date.now());
 
   useEffect(() => {
     let cancelled = false;
 
     function hide() {
       if (cancelled) return;
-      const elapsed = Date.now() - startTime.current;
-      const delay = Math.max(0, MIN_DISPLAY_MS - elapsed);
-      setTimeout(() => {
-        if (cancelled) return;
-        setFading(true);
-        setTimeout(() => { if (!cancelled) setGone(true); }, 550);
-      }, delay);
+      setFading(true);
+      setTimeout(() => { if (!cancelled) setGone(true); }, 600);
     }
 
-    function waitForVideos() {
-      const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("video"));
-      if (videos.length === 0) { hide(); return; }
-
-      let pending = videos.filter(v => v.readyState < 4).length;
-      if (pending === 0) { hide(); return; }
-
-      function onReady() {
-        pending--;
-        if (pending <= 0) hide();
-      }
-
-      videos.forEach(v => {
-        if (v.readyState >= 4) return;
-        v.addEventListener("canplaythrough", onReady, { once: true });
-      });
+    function afterLoad() {
+      if (cancelled) return;
+      // Wait extra buffer time after window.load for videos to buffer
+      const elapsed = Date.now() - startRef.current;
+      const remaining = Math.max(0, POST_LOAD_BUFFER_MS - elapsed);
+      setTimeout(hide, remaining);
     }
 
-    // Fallback — never block longer than 6s
-    const fallback = setTimeout(hide, 6000);
+    const maxTimer = setTimeout(hide, MAX_WAIT_MS);
 
     if (document.readyState === "complete") {
-      waitForVideos();
+      afterLoad();
     } else {
-      window.addEventListener("load", waitForVideos, { once: true });
+      window.addEventListener("load", afterLoad, { once: true });
     }
 
     return () => {
       cancelled = true;
-      clearTimeout(fallback);
+      clearTimeout(maxTimer);
     };
   }, []);
 
@@ -69,7 +55,7 @@ export function PageLoader() {
       justifyContent: "center",
       gap: "28px",
       zIndex: 9999,
-      transition: "opacity 0.55s ease",
+      transition: "opacity 0.6s ease",
       opacity: fading ? 0 : 1,
       pointerEvents: fading ? "none" : "all",
     }}>
