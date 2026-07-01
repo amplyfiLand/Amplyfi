@@ -222,7 +222,14 @@ export function ContactModal({ isOpen, onClose }: Props) {
                   </div>
                   {TURNSTILE_KEY && (
                     <div className={styles.turnstile}>
-                      <TurnstileWidget siteKey={TURNSTILE_KEY} onVerify={handleTurnstileVerify} onExpire={handleTurnstileExpire} />
+                      {turnstileToken ? (
+                        <div className={styles.captchaDone}>
+                          <span className={styles.captchaDoneIcon}>✓</span>
+                          <span className={styles.captchaDoneText}>Verified</span>
+                        </div>
+                      ) : (
+                        <TurnstileWidget siteKey={TURNSTILE_KEY} onVerify={handleTurnstileVerify} onExpire={handleTurnstileExpire} />
+                      )}
                     </div>
                   )}
                   <label className={styles.gdpr}>
