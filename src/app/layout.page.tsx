@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { fetchLandingPage } from "@/shared/sanity/fetch";
+import { PageLoader } from "@/shared/ui/PageLoader";
 import "./globals.scss";
 
 const inter = Inter({
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: RootLayoutProperties) {
   return (
     <html lang="en" className={inter.variable}>
       <body>
+        <PageLoader />
         {children}
         <script
           type="application/ld+json"
