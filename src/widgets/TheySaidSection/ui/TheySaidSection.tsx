@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { fadeLeft, fadeRight, fadeUp, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
-import { landingAssets, LandingAssetKey } from "@/shared/assets/landingAssets";
 import { useLandingContent } from "@/shared/contexts/LandingContent";
 import styles from "./TheySaidSection.module.scss";
 
@@ -61,10 +60,13 @@ export function TheySaidSection() {
 
   return (
     <section className={styles.section} id="they-said">
-      <img
+      <video
         className={styles.waveform}
-        src={landingAssets[LandingAssetKey.Waveform]}
-        alt=""
+        src="/assets/Lines_Loop_Vignette.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
         aria-hidden="true"
       />
       <motion.div
