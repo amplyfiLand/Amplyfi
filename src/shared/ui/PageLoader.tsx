@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const MIN_DISPLAY_MS = 800;
+const MIN_DISPLAY_MS = 1200;
 
 export function PageLoader() {
   const [fading, setFading] = useState(false);
@@ -27,7 +27,7 @@ export function PageLoader() {
       const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("video"));
       if (videos.length === 0) { hide(); return; }
 
-      let pending = videos.filter(v => v.readyState < 3).length;
+      let pending = videos.filter(v => v.readyState < 4).length;
       if (pending === 0) { hide(); return; }
 
       function onReady() {
@@ -36,8 +36,8 @@ export function PageLoader() {
       }
 
       videos.forEach(v => {
-        if (v.readyState >= 3) return;
-        v.addEventListener("canplay", onReady, { once: true });
+        if (v.readyState >= 4) return;
+        v.addEventListener("canplaythrough", onReady, { once: true });
       });
     }
 
