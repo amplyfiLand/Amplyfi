@@ -186,6 +186,12 @@
 
 // ── New fields added for contact form integration ─────────────────
 
+.fieldHint {
+  font-size: 11px;
+  color: rgba(245, 245, 247, 0.3);
+  align-self: flex-end;
+}
+
 .labelOptional {
   color: rgba(245, 245, 247, 0.3);
   font-size: 11px;

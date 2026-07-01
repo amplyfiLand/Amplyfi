@@ -214,6 +214,11 @@ export function ContactModal({ isOpen, onClose }: Props) {
                   <div className={styles.field}>
                     <label className={styles.label}>Your message</label>
                     <textarea className={styles.textarea} placeholder="Tell us about yourself..." rows={4} value={form.message} onChange={handleChange("message")} required minLength={10} maxLength={2000} />
+                    <span className={styles.fieldHint}>
+                      {form.message.length < 10
+                        ? `${form.message.length}/10 minimum characters`
+                        : `${form.message.length}/2000`}
+                    </span>
                   </div>
                   {TURNSTILE_KEY && (
                     <div className={styles.turnstile}>

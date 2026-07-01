@@ -46,16 +46,18 @@ export async function POST(request: Request) {
   const from = process.env.RESEND_FROM_EMAIL ?? 'noreply@amplify.com';
   const to = process.env.CONTACT_RECEIVER_EMAIL ?? email;
 
-  try {
-    await resend.emails.send({
-      from,
-      to,
-      replyTo: email,
-      subject: `New contact: ${name}`,
-      html: buildContactEmailHtml({ name, email, company, role, message }),
-    });
-    return NextResponse.json({ success: true });
-  } catch {
+  const { error: sendError } = await resend.emails.send({
+    from,
+    to,
+    replyTo: email,
+    subject: `New contact: ${name}`,
+    html: buildContactEmailHtml({ name, email, company, role, message }),
+  });
+
+  if (sendError) {
+    console.error('Resend error:', sendError);
     return NextResponse.json({ error: 'Failed to send email. Please try again later.' }, { status: 500 });
   }
+
+  return NextResponse.json({ success: true });
 }
