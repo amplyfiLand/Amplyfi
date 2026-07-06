@@ -53,7 +53,7 @@
   background: var(--divider-color);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
   .bar {
     padding: 28px 24px;
     gap: 0;
@@ -103,5 +103,13 @@
 
   .label {
     font-size: 13px;
+  }
+}
+
+// ── Short landscape phones (e.g. iPhone SE rotated) ───────────────
+@media (max-height: 500px) and (orientation: landscape) {
+  .bar {
+    min-height: 150px;
+    padding: 0;
   }
 }

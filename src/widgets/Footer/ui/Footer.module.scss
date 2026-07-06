@@ -50,3 +50,25 @@
     gap: 16px;
   }
 }
+
+// ── Short landscape phones (e.g. iPhone SE rotated) ───────────────
+// At this width the copy line and links no longer fit on one row but
+// the <=640px rule above doesn't fire (this width is wider than that),
+// so it wraps into two left-aligned rows by default. Center it instead.
+@media (max-height: 500px) and (orientation: landscape) {
+  .footer {
+    padding: 16px 0;
+  }
+
+  .inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .links {
+    justify-content: center;
+    gap: 16px;
+  }
+}

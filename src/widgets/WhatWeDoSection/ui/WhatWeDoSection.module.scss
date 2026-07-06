@@ -212,3 +212,60 @@
     font-size: 12px;
   }
 }
+
+// ── Short landscape phones (e.g. iPhone SE rotated) ───────────────
+// The >640px-wide rules above keep 2 columns, which leaves an orphan
+// 3rd card wasting a full row of empty space, and a min-height tuned
+// for a tall viewport that forces a lot of scrolling on a 375px-tall
+// screen. Landscape width is wide enough for all 3 cards in one row —
+// use that instead of stacking, and shrink to cut the scroll distance.
+@media (max-height: 500px) and (orientation: landscape) {
+  .section {
+    padding: 0 0 24px;
+  }
+
+  .copy {
+    gap: 8px;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .card {
+    min-height: 150px;
+    padding: 14px 12px;
+  }
+
+  .cardIcon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .amplifyIcon {
+    width: 52px;
+    height: 27px;
+    margin-top: 4px;
+  }
+
+  .cardBody {
+    gap: 6px;
+  }
+
+  .cardTitle {
+    font-size: 14px;
+  }
+
+  .cardDescription {
+    font-size: 11px;
+  }
+}

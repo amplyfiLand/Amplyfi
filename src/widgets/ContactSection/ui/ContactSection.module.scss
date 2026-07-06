@@ -169,3 +169,35 @@
     font-size: 14px;
   }
 }
+
+// ── Short landscape phones (e.g. iPhone SE rotated) ───────────────
+// `.title` sits in a `1fr` grid row with `margin-top: auto`, so on a
+// tall min-height card it floats far below the logo with a dead gap
+// between them. Drop the row down to `auto` sizing so it hugs its
+// content instead of stretching to fill the card.
+@media (max-height: 500px) and (orientation: landscape) {
+  .inner {
+    min-height: 0;
+    grid-template-rows: auto auto auto;
+    row-gap: 12px;
+    padding: 20px 24px;
+  }
+
+  .title {
+    margin: 0;
+    padding-top: 0;
+    font-size: clamp(28px, 5vw, 40px);
+  }
+
+  .details {
+    margin-top: 0;
+  }
+
+  .cta {
+    right: 20px;
+    bottom: 20px;
+    width: 130px;
+    height: 42px;
+    font-size: 15px;
+  }
+}

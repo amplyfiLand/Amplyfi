@@ -38,6 +38,7 @@ fig-source/
 # local source/archive helpers
 .agents/
 .codex/
+.claude/
 *.fig
 
 # OS/editor
