@@ -108,41 +108,63 @@
 
 .cta::after {
   content: "";
+  flex-shrink: 0;
   width: 18px;
   height: 18px;
   background: currentColor;
   clip-path: polygon(0 8px, 13px 8px, 7px 2px, 9px 0, 18px 9px, 9px 18px, 7px 16px, 13px 10px, 0 10px);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
   .hero {
     height: clamp(600px, 88vw, 810px);
   }
 
+  // Full-bleed video + centered copy — same recipe as the <=640px and
+  // short-landscape rules further down. Below 1050px there's no longer
+  // room to keep the video confined to a side column next to the text.
   .background {
-    left: 28%;
-    width: 72%;
+    left: -15%;
+    top: 0;
+    width: 130%;
+    height: 100%;
+    object-position: 60% center;
+  }
+
+  .overlay {
+    background: linear-gradient(180deg, rgba(3, 3, 7, 0.3) 0%, rgba(3, 3, 7, 0.7) 74%);
+  }
+
+  .videoSoftEdge {
+    background:
+      linear-gradient(90deg, rgba(3, 3, 7, 0.54) 0%, rgba(3, 3, 7, 0.16) 40%, rgba(3, 3, 7, 0) 70%),
+      linear-gradient(180deg, rgba(3, 3, 7, 0) 52%, rgba(3, 3, 7, 0.58) 78%, var(--background-color) 100%);
   }
 
   .content {
-    padding-top: clamp(90px, 13vw, 150px);
+    // Vertically centered in the hero box via flex, not pushed down
+    // from the top — height:100% needs .hero's own height to be a
+    // definite length, which the clamp() above provides. The logo
+    // (bottom edge ~101px) never gets close to a vertically-centered
+    // block this size, so no separate clearance padding is needed.
+    height: 100%;
+    padding: 0 24px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .headlineLine {
+    justify-content: center;
   }
 }
 
 @media (max-width: 768px) {
   .hero {
     height: clamp(560px, 90vw, 700px);
-  }
-
-  .background {
-    left: 20%;
-    width: 80%;
-  }
-
-  .content {
-    padding-top: clamp(80px, 12vw, 110px);
-    max-width: 100%;
-    padding-right: clamp(16px, 4vw, 40px);
   }
 
   .headlineLine {
@@ -154,8 +176,9 @@
   }
 
   .cta {
-    width: clamp(180px, 28vw, 240px);
+    width: fit-content;
     height: 52px;
+    padding: 0 22px;
     font-size: clamp(14px, 1.8vw, 18px);
   }
 }
@@ -186,11 +209,16 @@
   }
 
   .content {
-    padding: 150px 24px 0;
+    // .hero is height:auto here (it grows with content, floored by
+    // min-height), so a percentage height wouldn't resolve — match
+    // hero's own min-height directly instead.
+    min-height: 493px;
+    padding: 0 24px;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
   }
 
@@ -230,5 +258,62 @@
 
   .cta::after {
     display: none;
+  }
+}
+
+// ── Short landscape phones (e.g. iPhone SE rotated) ───────────────
+// See matching note in Header.module.scss — the vw-based padding-top
+// above doesn't shrink enough in this width/height combo to clear the
+// logo, so pin it directly for short landscape viewports.
+@media (max-height: 500px) and (orientation: landscape) {
+  // Pin the hero to the actual viewport height — the width-based rules
+  // above may leave it at "auto" (mobile portrait) or a vw-clamped value
+  // taller than a short landscape screen, neither of which is a usable
+  // reference for vertically centering .content below.
+  .hero {
+    height: 100dvh;
+    min-height: 0;
+    padding-bottom: 0;
+  }
+
+  // Centered copy explicitly, not just inherited from the <=1050px
+  // width rule — a short landscape screen can still be wider than that
+  // (e.g. an unfolded foldable), and should get the same treatment.
+  .content {
+    height: 100%;
+    padding: 0 24px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .headlineLine {
+    justify-content: center;
+  }
+
+  // The width-based rules above keep the video in a tall, narrow column
+  // sized for portrait phones (~40% of it visible after object-fit: cover
+  // crops to the box). On a short landscape screen that column is even
+  // taller relative to its width, so the crop gets more extreme, not less.
+  // Go full-bleed instead, same treatment as the <=640px portrait rule.
+  .background {
+    left: -15%;
+    top: 0;
+    width: 130%;
+    height: 100%;
+    object-position: 60% center;
+  }
+
+  .overlay {
+    background: linear-gradient(180deg, rgba(3, 3, 7, 0.3) 0%, rgba(3, 3, 7, 0.7) 74%);
+  }
+
+  .videoSoftEdge {
+    background:
+      linear-gradient(90deg, rgba(3, 3, 7, 0.54) 0%, rgba(3, 3, 7, 0.16) 40%, rgba(3, 3, 7, 0) 70%),
+      linear-gradient(180deg, rgba(3, 3, 7, 0) 52%, rgba(3, 3, 7, 0.58) 78%, var(--background-color) 100%);
   }
 }

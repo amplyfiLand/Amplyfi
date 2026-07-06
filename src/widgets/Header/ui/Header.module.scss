@@ -181,3 +181,21 @@
     display: none;
   }
 }
+
+// ── Short landscape phones (e.g. iPhone SE rotated) ───────────────
+// Width-based breakpoints above don't catch this: a small phone in
+// landscape is wide enough to skip the 640px mobile rules, but too
+// short for the logo's default top offset to clear the hero copy.
+@media (max-height: 500px) and (orientation: landscape) {
+  .logoWrapper {
+    top: 10px;
+  }
+
+  // Scale the wrapper, not `.compact` — framer-motion drives that
+  // element's own inline `transform` for the fade/slide animation and
+  // would silently clobber a CSS transform set on it directly.
+  .logoInner {
+    transform: scale(0.6);
+    transform-origin: left top;
+  }
+}
