@@ -1,0 +1,3 @@
+amplifytalent.io, www.amplifytalent.io {
+	reverse_proxy app:3000
+}

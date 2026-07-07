@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   pageExtensions: ["page.tsx", "page.ts", "api.ts", "api.tsx"],
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"]
