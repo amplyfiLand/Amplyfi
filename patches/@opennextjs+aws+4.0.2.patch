@@ -1,0 +1,32 @@
+diff --git a/node_modules/@opennextjs/aws/dist/build/helper.js b/node_modules/@opennextjs/aws/dist/build/helper.js
+index 6524181..55ed2c7 100644
+--- a/node_modules/@opennextjs/aws/dist/build/helper.js
++++ b/node_modules/@opennextjs/aws/dist/build/helper.js
+@@ -344,11 +344,26 @@ export function printOpenNextVersion(options) {
+  * and the package.json is in the root of the monorepo where the build is in
+  * the app directory, but the compiled config is in the root of the monorepo.
+  */
++function copyRecursiveSync(src, dest) {
++    fs.mkdirSync(dest, { recursive: true });
++    for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
++        const srcPath = path.join(src, entry.name);
++        const destPath = path.join(dest, entry.name);
++        if (entry.isDirectory()) {
++            copyRecursiveSync(srcPath, destPath);
++        }
++        else {
++            fs.copyFileSync(srcPath, destPath);
++        }
++    }
++}
+ export function initOutputDir(options) {
+     fs.rmSync(options.outputDir, { recursive: true, force: true });
+     const { buildDir } = options;
+     fs.mkdirSync(buildDir, { recursive: true });
+-    fs.cpSync(options.tempBuildDir, buildDir, { recursive: true });
++    // `fs.cpSync` silently drops files when the destination lives inside a
++    // OneDrive-synced folder on Windows (Node 22), so copy manually instead.
++    copyRecursiveSync(options.tempBuildDir, buildDir);
+ }
+ /**
+  * @returns Whether the edge runtime is used
