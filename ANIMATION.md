@@ -196,11 +196,3 @@ parallax.ts
 Avoid duplicated motion configs.
 
 ---
-
-## Final result
-
-The user should think:
-
-"The designer originally created it like this."
-
-The animations must feel like a natural part of the design rather than something added afterwards.
