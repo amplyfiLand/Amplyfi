@@ -196,5 +196,3 @@ parallax.ts
 Avoid duplicated motion configs.
 
 ---
-
-
