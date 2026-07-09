@@ -1,0 +1,22 @@
+diff --git a/node_modules/sanity/lib/_chunks-cjs/runtime.js b/node_modules/sanity/lib/_chunks-cjs/runtime.js
+index 074ab8f..0817f23 100644
+--- a/node_modules/sanity/lib/_chunks-cjs/runtime.js
++++ b/node_modules/sanity/lib/_chunks-cjs/runtime.js
+@@ -984,7 +984,7 @@ async function writeSanityRuntime({
+       studioRootPath: cwd,
+       monorepo,
+       props: {
+-        entryPath: `/${path__default.default.relative(cwd, path__default.default.join(runtimeDir, "app.js"))}`,
++        entryPath: `/${path__default.default.relative(cwd, path__default.default.join(runtimeDir, "app.js")).split(path__default.default.sep).join("/")}`,
+         basePath: basePath || "/"
+       },
+       isApp
+@@ -995,7 +995,7 @@ async function writeSanityRuntime({
+   let relativeConfigLocation = null;
+   if (!isApp) {
+     const studioConfigPath = await getSanityStudioConfigPath(cwd);
+-    relativeConfigLocation = studioConfigPath ? path__default.default.relative(runtimeDir, studioConfigPath) : null;
++    relativeConfigLocation = studioConfigPath ? path__default.default.relative(runtimeDir, studioConfigPath).split(path__default.default.sep).join("/") : null;
+   }
+   const relativeEntry = cwd ? path__default.default.resolve(cwd, entry || "./src/App") : entry, appJsContent = getEntryModule({
+     reactStrictMode,

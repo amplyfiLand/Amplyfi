@@ -11,6 +11,7 @@ out/
 build/
 dist/
 coverage/
+.sanity/
 
 # local env
 .env

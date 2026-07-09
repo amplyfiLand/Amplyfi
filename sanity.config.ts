@@ -5,7 +5,7 @@ import { schemas } from './sanity/schemas';
 export default defineConfig({
   name: 'amplify-studio',
   title: 'Amplify CMS',
-  basePath: '/studio',
+  basePath: '/',
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
   plugins: [structureTool()],
