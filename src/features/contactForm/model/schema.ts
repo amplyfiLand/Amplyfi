@@ -10,7 +10,7 @@ export const contactSchema = z.object({
   role: z.string().optional(),
   message: z
     .string()
-    .min(10, 'Message must be at least 10 characters')
+    .min(1, 'Message is required')
     .max(2000, 'Message is too long'),
   gdprConsent: z.literal(true, {
     errorMap: () => ({ message: 'You must accept the privacy policy' }),
