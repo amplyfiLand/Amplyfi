@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { fadeLeft, fadeRight, fadeUp, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
 import { useLandingContent } from "@/shared/contexts/LandingContent";
+import { useAutoplayVideo } from "@/shared/hooks/useAutoplayVideo";
 import styles from "./TheySaidSection.module.scss";
 
 function splitAtFirstSentence(text: string): [string, string] {
@@ -25,6 +26,7 @@ export function TheySaidSection() {
   const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const videoRef = useAutoplayVideo<HTMLVideoElement>();
 
   useEffect(() => {
     if (paused) return;
@@ -61,6 +63,7 @@ export function TheySaidSection() {
   return (
     <section className={styles.section} id="they-said">
       <video
+        ref={videoRef}
         className={styles.waveform}
         src="/assets/Lines_Loop_Vignette.mp4"
         autoPlay

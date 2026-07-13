@@ -6,12 +6,14 @@ import { useSubtleParallax } from "@/shared/animations/parallax";
 import { fadeLeft, fadeRight, fadeUp, softReveal, viewportOnce } from "@/shared/animations/reveal";
 import { staggerContainer } from "@/shared/animations/stagger";
 import { useLandingContent } from "@/shared/contexts/LandingContent";
+import { useAutoplayVideo } from "@/shared/hooks/useAutoplayVideo";
 import styles from "./LegaciesSection.module.scss";
 
 export function LegaciesSection() {
   const landingContent = useLandingContent();
   const sectionReference = useRef<HTMLElement>(null);
   const videoY = useSubtleParallax(sectionReference, 14);
+  const videoRef = useAutoplayVideo<HTMLVideoElement>();
 
   return (
     <section className={styles.section} ref={sectionReference} id="legacies">
@@ -45,6 +47,7 @@ export function LegaciesSection() {
         </div>
         <motion.div className={styles.showcase} variants={softReveal}>
           <motion.video
+            ref={videoRef}
             className={styles.legacyVideo}
             aria-hidden="true"
             autoPlay

@@ -5,13 +5,16 @@ import { buttonHover, buttonTap } from "@/shared/animations/hover";
 import { fadeUp, softReveal } from "@/shared/animations/reveal";
 import { heroStagger } from "@/shared/animations/stagger";
 import { useLandingContent } from "@/shared/contexts/LandingContent";
+import { useAutoplayVideo } from "@/shared/hooks/useAutoplayVideo";
 import styles from "./HeroSection.module.scss";
 
 export function HeroSection() {
   const landingContent = useLandingContent();
+  const videoRef = useAutoplayVideo<HTMLVideoElement>();
   return (
     <section className={styles.hero}>
       <motion.video
+        ref={videoRef}
         className={styles.background}
         aria-hidden="true"
         autoPlay

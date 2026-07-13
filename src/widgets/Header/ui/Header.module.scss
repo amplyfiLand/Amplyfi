@@ -29,11 +29,16 @@
 }
 
 // ── Sticky nav ────────────────────────────────────────────────────
+// Centered via left/right + margin auto rather than left:50% + transform:
+// iOS Safari fails to render backdrop-filter on a position:fixed element
+// whose ancestor also carries a CSS transform, so the transform is kept
+// off this fixed wrapper entirely.
 .navWrapper {
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   width: min(calc(var(--content-max-width) + 2 * var(--section-side-padding)), 100%);
   z-index: 10;
 }
@@ -50,6 +55,10 @@
   backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
   overflow: hidden;
   will-change: transform, opacity;
+  // Forces its own GPU compositing layer — without it, iOS Safari can
+  // silently skip painting backdrop-filter on fixed-position elements.
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .nav::before,
@@ -161,8 +170,8 @@
   .navWrapper {
     top: 0;
     left: 0;
+    right: 0;
     width: 100%;
-    transform: none;
   }
 
   .nav {
