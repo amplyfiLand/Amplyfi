@@ -5,9 +5,18 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  -webkit-backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
-  backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
+  // Plain blur baseline — Safari/iOS doesn't support referencing an SVG
+  // filter (url(#id)) from backdrop-filter at all, so it must never be the
+  // only declaration or those browsers get no blur whatsoever.
+  -webkit-backdrop-filter: blur(7px) saturate(1.4);
+  backdrop-filter: blur(7px) saturate(1.4);
   pointer-events: auto;
+
+  // SVG-displacement distortion layered on top, only where it actually parses.
+  @supports (backdrop-filter: url(#a)) or (-webkit-backdrop-filter: url(#a)) {
+    -webkit-backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
+    backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
+  }
 
   transform: translateZ(0);
   transition:
