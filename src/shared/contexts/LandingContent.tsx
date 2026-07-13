@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext } from 'react';
-import type { HowWeHelpCard, WhatWeDoItem } from '@/shared/config/landingContentClean';
+import type { ContactLink, HowWeHelpCard, WhatWeDoItem } from '@/shared/config/landingContentClean';
 import { landingContent } from '@/shared/config/landingContentClean';
 import type { SanityLandingContent } from '@/shared/sanity/types';
 
@@ -63,8 +63,7 @@ function mergeContent(sanity: SanityLandingContent | null) {
     ...(sanity.contact && {
       contact: {
         title: sanity.contact.title ?? landingContent.contact.title,
-        phone: sanity.contact.phone ?? landingContent.contact.phone,
-        email: sanity.contact.email ?? landingContent.contact.email,
+        links: (sanity.contact.links as ContactLink[] | undefined) ?? [],
         cta: sanity.contact.cta ?? landingContent.contact.cta,
       },
     }),

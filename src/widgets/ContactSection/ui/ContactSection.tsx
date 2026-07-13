@@ -49,24 +49,21 @@ export function ContactSection() {
           <motion.h2 className={styles.title} variants={fadeUp}>
             {landingContent.contact.title}
           </motion.h2>
-          <motion.div className={styles.details} variants={staggerContainer(0.04, 0.06)}>
-            <motion.a
-              href={`tel:${landingContent.contact.phone}`}
-              className={styles.contactLine}
-              variants={fadeUp}
-              whileHover={{ opacity: 0.72, x: 3 }}
-            >
-              {landingContent.contact.phone}
-            </motion.a>
-            <motion.a
-              href={`mailto:${landingContent.contact.email}`}
-              className={styles.contactLine}
-              variants={fadeUp}
-              whileHover={{ opacity: 0.72, x: 3 }}
-            >
-              {landingContent.contact.email}
-            </motion.a>
-          </motion.div>
+          {landingContent.contact.links.length > 0 && (
+            <motion.div className={styles.details} variants={staggerContainer(0.04, 0.06)}>
+              {landingContent.contact.links.map((link) => (
+                <motion.a
+                  key={`${link.label}-${link.href}`}
+                  href={link.href}
+                  className={styles.contactLine}
+                  variants={fadeUp}
+                  whileHover={{ opacity: 0.72, x: 3 }}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+            </motion.div>
+          )}
           <motion.button
             className={styles.cta}
             variants={fadeUp}

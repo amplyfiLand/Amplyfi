@@ -29,6 +29,11 @@ export type HowWeHelpCard = {
   description: string;
 };
 
+export type ContactLink = {
+  label: string;
+  href: string;
+};
+
 export const landingContent = {
   brand: {
     name: "AMPLIFY",
@@ -137,8 +142,10 @@ export const landingContent = {
   },
   contact: {
     title: "Contact us",
-    phone: "+1 (999) 999-99-99",
-    email: "amplify.mail@amplify.com",
+    links: [
+      { label: "+1 (999) 999-99-99", href: "tel:+19999999999" },
+      { label: "amplify.mail@amplify.com", href: "mailto:amplify.mail@amplify.com" }
+    ] as ContactLink[],
     cta: "Amplify Me!"
   }
 } as const;

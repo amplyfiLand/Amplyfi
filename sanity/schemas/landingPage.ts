@@ -168,8 +168,35 @@ export const landingPage = defineType({
       type: 'object',
       fields: [
         defineField({ name: 'title', title: 'Title', type: 'string' }),
-        defineField({ name: 'phone', title: 'Phone', type: 'string' }),
-        defineField({ name: 'email', title: 'Email', type: 'string' }),
+        defineField({
+          name: 'links',
+          title: 'Contact Links',
+          description:
+            'Shown as clickable lines under the title. Leave empty to show none. For a phone number use "tel:+19999999999", for an email use "mailto:you@example.com", or use any other URL.',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'label',
+                  title: 'Label (displayed text)',
+                  type: 'string',
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: 'href',
+                  title: 'Link (tel:, mailto:, or URL)',
+                  type: 'string',
+                  validation: (Rule) => Rule.required(),
+                }),
+              ],
+              preview: {
+                select: { title: 'label', subtitle: 'href' },
+              },
+            },
+          ],
+        }),
         defineField({ name: 'cta', title: 'CTA Button Text', type: 'string' }),
       ],
     }),

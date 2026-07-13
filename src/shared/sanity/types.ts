@@ -30,8 +30,7 @@ export type SanityLandingContent = {
   };
   contact?: {
     title?: string;
-    phone?: string;
-    email?: string;
+    links?: Array<{ label: string; href: string }>;
     cta?: string;
   };
   seo?: {
