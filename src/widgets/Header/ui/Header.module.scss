@@ -51,6 +51,13 @@
   gap: 18px;
   width: 100%;
   padding: 9px 0;
+  // iOS Safari frequently fails to paint backdrop-filter on position:fixed
+  // elements at all. Every other liquid-glass panel in this app survives
+  // that silently because it has its own opaque-ish background/overlay
+  // underneath (see ContactSection's .overlay) — the header has nothing
+  // else behind it, so without this tint it goes fully invisible on iOS.
+  // Keep it as a base layer; backdrop-filter still enhances it where supported.
+  background: rgba(3, 3, 7, 0.12);
   -webkit-backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
   backdrop-filter: url(#app-header-liquid-glass) blur(7px) saturate(1.4);
   overflow: hidden;
