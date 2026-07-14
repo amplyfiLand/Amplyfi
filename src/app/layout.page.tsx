@@ -81,9 +81,30 @@ const jsonLd = {
 
 type RootLayoutProperties = Readonly<{ children: React.ReactNode }>;
 
+// Runs before first paint so the `ios` class is present on <html> by the
+// time liquid-glass panels render — CSS @supports can't tell iOS Safari
+// apart from browsers that parse the same backdrop-filter value but
+// actually render it, so detection has to happen in JS instead.
+// `?liquidGlass=ios` / `=off` force the class on/off in any browser, so the
+// fallback styling can be previewed on desktop without a real device.
+const IOS_DETECT_SCRIPT = `
+(function () {
+  var forced = new URLSearchParams(location.search).get("liquidGlass");
+  if (forced === "ios") { document.documentElement.classList.add("ios"); return; }
+  if (forced === "off") { return; }
+  var ua = navigator.userAgent;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (isIOS) document.documentElement.classList.add("ios");
+})();
+`;
+
 export default function RootLayout({ children }: RootLayoutProperties) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: IOS_DETECT_SCRIPT }} />
+      </head>
       <body>
         <PageLoader />
         {children}
