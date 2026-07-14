@@ -100,6 +100,39 @@
   }
 }
 
+// ── iOS fallback ──────────────────────────────────────────────────
+// Real iOS Safari renders this bar flat even though @supports reports the
+// backdrop-filter/url() combo as valid — `.ios` is set on <html> via JS
+// (see RootLayout) so this can be targeted directly instead of relying on
+// a CSS feature query. Two classes ⇒ higher specificity than `.nav` alone,
+// so it wins outright and overrides the @supports block above too.
+:global(.ios) .nav {
+  background: rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(18px) saturate(1.8) brightness(1.1);
+  backdrop-filter: blur(18px) saturate(1.8) brightness(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.12),
+    0 18px 48px rgba(0, 0, 0, 0.22);
+}
+
+:global(.ios) .nav::before {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.42), transparent 32%),
+    radial-gradient(circle at 80% 100%, rgba(255, 255, 255, 0.18), transparent 36%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.24), transparent 42%);
+  mix-blend-mode: screen;
+}
+
+:global(.ios) .nav::after {
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.12), transparent 28%, rgba(255, 255, 255, 0.1) 56%, transparent);
+  opacity: 0.7;
+  mix-blend-mode: normal;
+  filter: none;
+}
+
 .brand {
   display: inline-flex;
   flex: 0 0 auto;

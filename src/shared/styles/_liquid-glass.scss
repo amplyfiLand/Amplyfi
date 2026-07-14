@@ -36,7 +36,7 @@
 
   // Top-left + bottom-right catchlights — same as sticky header
   &::before {
-  
+
     mix-blend-mode: screen;
   }
 
@@ -50,6 +50,40 @@
   > * {
     position: relative;
     z-index: 1;
+  }
+
+  // iOS fallback — the SVG-displacement distortion never applies there (see
+  // @supports gate above), and plain blur alone reads flat on real devices,
+  // so fake the depth with layered gradients + inset highlights instead.
+  // `.ios` is set on <html> by JS (see RootLayout) since @supports can't
+  // distinguish "parses" from "actually renders" for iOS Safari.
+  // Two classes ⇒ higher specificity than the plain selector above, so this
+  // wins outright regardless of source order.
+  :global(.ios) & {
+    background: rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(18px) saturate(1.8) brightness(1.1);
+    backdrop-filter: blur(18px) saturate(1.8) brightness(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.42),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.12),
+      0 18px 48px rgba(0, 0, 0, 0.22);
+
+    &::before {
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.42), transparent 32%),
+        radial-gradient(circle at 80% 100%, rgba(255, 255, 255, 0.18), transparent 36%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.24), transparent 42%);
+      mix-blend-mode: screen;
+    }
+
+    &::after {
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.12), transparent 28%, rgba(255, 255, 255, 0.1) 56%, transparent);
+      opacity: 0.7;
+      mix-blend-mode: normal;
+      filter: none;
+    }
   }
 }
 
